@@ -57,7 +57,7 @@ void HttpAccessManager::peekReplyFinished()
 {
     QNetworkReply *reply = dynamic_cast<QNetworkReply*>(sender());
     HttpConversation& conversation = m_conversations[reply];
-    conversation.replyData.append(reply->peek(reply->bytesAvailable()));
+    //conversation.replyData.append(reply->peek(reply->bytesAvailable()));
 
     conversation.status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
@@ -71,5 +71,7 @@ void HttpAccessManager::peekReplyFinished()
     default:
         break;
     }
+
+    m_conversations.remove(reply);
 }
 
